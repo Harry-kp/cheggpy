@@ -17,5 +17,5 @@ try:
         else:
             chegg.skip_question()
 except KeyboardInterrupt:
-    print("Script stopped by user.")
+    print("Script stopped by user..........")
     chegg.logout()

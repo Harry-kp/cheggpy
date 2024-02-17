@@ -2,12 +2,14 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='cheggbot',
+    name='cheggpy',
     version='0.1.0',
     packages=find_packages(),
     install_requires=[
-        'requests',
         'bs4',
+        'requests',
+        'colorama',
+        'tqdm'
     ],
     author='Harry-kp',
     author_email='chaudharyharshit9@gmail.com',
