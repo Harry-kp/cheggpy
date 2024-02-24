@@ -1,6 +1,11 @@
 # CheggPy 📘
 
-CheggPy is a Python package designed for interacting with the Chegg API, specifically tailored for Chegg Experts. It provides functionalities to login, fetch questions, analyze them based on keywords, and skip questions as needed. With CheggPy, you can automate tasks related to answering questions on Chegg's platform efficiently.
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Harry-kp/cheggbot/main/docs/images/icon.png" width="154" alt="Cheggbot Logo">
+  <p>CheggPy is a Python package designed for interacting with the Chegg API, specifically tailored for Chegg Experts. It provides functionalities to login, fetch questions, analyze them based on keywords, and skip questions as needed. With CheggPy, you can automate tasks related to answering questions on Chegg's platform efficiently.</p>
+</div>
+
+---
 
 ![GitHub](https://img.shields.io/github/license/Harry-kp/cheggpy)
 
@@ -12,6 +17,10 @@ CheggPy is a Python package designed for interacting with the Chegg API, specifi
 - **Customizable**: Adjust timeouts and keywords to match your preferences.
 - **Randomized Timeouts**: Randomize timeouts to avoid detection and improve efficiency.
 - **Clear Interface**: Easy-to-understand interface with banners and notifications for enhanced user experience.
+
+## Documentation
+
+- For detailed usage instructions, please refer to the [documentation](https://www.harrykp.tech/cheggpy/)
 
 ## Installation 🚀
 
