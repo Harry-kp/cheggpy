@@ -2,3 +2,6 @@ bs4
 requests
 colorama
 tqdm
+portray
+flake8
+autopep8

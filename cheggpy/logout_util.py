@@ -1,4 +1,4 @@
-"""Module only used for the login part of the script"""
+"""Module only used for the logged out part of the script"""
 
 
 def logout_user(session):
