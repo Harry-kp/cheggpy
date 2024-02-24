@@ -7,9 +7,22 @@ from .logout_util import logout_user
 from .question_util import fetch_latest_question, skip_latest_question, analyze_question
 from .question import Question
 
+__version__ = "1.0.0"
 
 class CheggPy:
-    """Class to interact with Chegg API"""
+    """
+        A class to interact with the Chegg API.
+
+        Args:
+            username (str): The username or email of the user.
+            password (str): The password of the user.
+            keywords (list): Keywords to search for in a chegg question to answer.
+            short_timeout (tuple): A tuple of two integers representing the range of short timeouts.For example, (5, 10) means the timeout will be between 5 and 10 seconds. This is used for the time between subsequent API requests.
+            long_timeout (tuple): A tuple of two integers representing the range of long timeouts. For example, (5*60, 10*60) means the timeout will be between 5 and 10 minutes. This is used to wait when there are no questions to answer.
+
+        Returns:
+            requests.Session: The session object after logging in.
+    """
 
     def __init__(self,
                  username=None,
