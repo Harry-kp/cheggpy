@@ -9,6 +9,7 @@ from .question import Question
 
 __version__ = "1.0.0"
 
+
 class CheggPy:
     """
         A class to interact with the Chegg API.
