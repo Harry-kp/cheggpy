@@ -7,7 +7,7 @@ from .logout_util import logout_user
 from .question_util import fetch_latest_question, skip_latest_question, analyze_question
 from .question import Question
 
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 
 
 class CheggPy:

@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cheggpy"
-version = "1.0.0"
+version = "1.0.1"
 description = "A Python package for interacting with the Chegg API for Chegg Experts"
 readme = "README.md"
 authors = [{ name = "Harrykp", email = "chaudharyharshit9@gmail.com" }]
@@ -36,7 +36,7 @@ Homepage = "https://github.com/Harry-kp/cheggpy"
 cheggbot = "cheggpy.__main__:main"
 
 [tool.bumpver]
-current_version = "1.0.0"
+current_version = "1.0.1"
 version_pattern = "MAJOR.MINOR.PATCH"
 commit_message  = "Bump version {old_version} -> {new_version}"
 commit          = true
