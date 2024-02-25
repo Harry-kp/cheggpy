@@ -34,6 +34,7 @@ def main():
         while True:
             chegg.fetch_question()
             if chegg.is_question_answerable():
+                print("Hurray!! You got a suitable question to answer -> {}".format(CheggPy.DASHBOARD_URL))
                 skip = input(
                     "Press enter to continue or press any other key to stop the script.")
                 if skip == "":

@@ -25,6 +25,8 @@ class CheggPy:
             requests.Session: The session object after logging in.
     """
 
+    DASHBOARD_URL = "https://expert.chegg.com/qna/authoring/answer"
+
     def __init__(self,
                  username=None,
                  password=None,
