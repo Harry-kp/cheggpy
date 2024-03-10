@@ -1,7 +1,7 @@
-# CheggPy 📘
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/Harry-kp/cheggbot/main/docs/images/icon.png" width="154" alt="Cheggbot Logo">
+<h1>CheggPy 🐍</h1>
+  <img src="https://github.com/Harry-kp/cheggpy/assets/55315065/9ae0bf28-0831-4111-8970-cd5e9d586b3e" width=720 height=500 alt="Cheggbot Logo">
   <p>CheggPy is a Python package designed for interacting with the Chegg API, specifically tailored for Chegg Experts. It provides functionalities to login, fetch questions, analyze them based on keywords, and skip questions as needed. With CheggPy, you can automate tasks related to answering questions on Chegg's platform efficiently.</p>
 </div>
 
