@@ -1,6 +1,7 @@
 """This module contains utility functions for the question on chegg."""
 
 import json
+from .custom_exceptions import EmptyQueue, NoQuestionToSkip
 
 
 def fetch_latest_question(session):
@@ -9,7 +10,6 @@ def fetch_latest_question(session):
         Returns dict with question_id, body, etc. if question is present.
         Otherwise, returns None or raises an Exception.
         '''
-    # log('Fetching the question')
     chegg_question_url = "https://gateway.chegg.com/nestor-graph/graphql"
     payload = json.dumps({
         "operationName": "NextQuestionAnsweringAssignment",
@@ -35,6 +35,9 @@ def fetch_latest_question(session):
     response = json.loads(session.request(
         "POST", chegg_question_url, data=payload).text)
     if response.get('errors') is not None:
+        error = response['errors'][0]
+        if error['extensions']['errorType'] == 'NO_QUESTION_ASSIGNED':
+            raise EmptyQueue('No more question left in queue to answer.')
         raise NotImplementedError(response['errors'][0]['message'])
     return response
 
@@ -42,7 +45,7 @@ def fetch_latest_question(session):
 def skip_latest_question(session, question):
     """Skip the latest question in the queue."""
     if question is None or question.id is None:
-        raise NotImplementedError('No question to skip')
+        raise NoQuestionToSkip('No question to skip.')
     chegg_question_url = "https://gateway.chegg.com/nestor-graph/graphql"
     payload = json.dumps({
         "operationName": "SkipQuestionAssignment",

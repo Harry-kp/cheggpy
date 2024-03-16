@@ -2,9 +2,10 @@
 
 import argparse
 import sys
+from requests.exceptions import HTTPError
 from cheggpy import CheggPy
 from .util import goodbye_banner
-from requests.exceptions import HTTPError
+from .custom_exceptions import MaxRetryReached, NoQuestionToSkip
 
 
 def parse_args():
@@ -34,16 +35,15 @@ def main():
         while True:
             chegg.fetch_question()
             if chegg.is_question_answerable():
-                print("Hurray!! You got a suitable question to answer -> {}".format(CheggPy.DASHBOARD_URL))
-                skip = input(
-                    "Press enter to continue or press any other key to stop the script.")
+                print(f"Hurray!! You got a suitable question to answer -> {CheggPy.DASHBOARD_URL}")
+                skip = input("Press enter to continue or press any other key to stop the script.")
                 if skip == "":
                     chegg.skip_question()
                 else:
                     raise KeyboardInterrupt
             else:
                 chegg.skip_question()
-    except HTTPError as e:
+    except (HTTPError, MaxRetryReached, NotImplementedError, NoQuestionToSkip) as e:
         print(e)
     except KeyboardInterrupt:
         print("Script stopped by user..........")

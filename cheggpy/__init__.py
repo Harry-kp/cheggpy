@@ -1,11 +1,12 @@
 """This module is the main module of the package and is used to interact with the Chegg API"""
 from os import environ
 from requests import Session, RequestException
-from .util import welcome_banner, random_wait, play_success_notification
+from .util import welcome_banner, random_wait, play_success_notification, retry
 from .login_util import login_user
 from .logout_util import logout_user
 from .question_util import fetch_latest_question, skip_latest_question, analyze_question
 from .question import Question
+from .custom_exceptions import EmptyQueue
 
 __version__ = "1.0.1"
 
@@ -66,16 +67,12 @@ class CheggPy:
         except NotImplementedError as err:
             print(str(err))
 
+    @retry(exceptions=EmptyQueue)
     def fetch_question(self):
-        """Fetch the latest question"""
-        try:
-            self.latest_question = Question(
-                fetch_latest_question(self.session))
-            print('Fetched the question successfully with id:',
-                  self.latest_question.id)
-            random_wait(*self.short_timeout)
-        except NotImplementedError as err:
-            print(str(err))
+        """Fetch the latest question with retry mechanism"""
+        self.latest_question = Question(fetch_latest_question(self.session))
+        print('Fetched the question successfully with id:', self.latest_question.id)
+        random_wait(*self.short_timeout)
         return self
 
     def skip_question(self):

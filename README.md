@@ -42,10 +42,6 @@ cheggbot --username <your-username> --password <your-password> --keywords python
 
 Refer to the ```quickstart.py``` file for a quick start guide.
 
-## Documentation 📚
-
-For detailed usage instructions and API reference, please refer to the [documentation](https://github.com/Harry-kp/cheggpy).
-
 ## Contributing 🤝
 
 Contributions are welcome! Please feel free to open issues or pull requests for any improvements or features you'd like to see.
