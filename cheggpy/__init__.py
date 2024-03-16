@@ -8,7 +8,7 @@ from .question_util import fetch_latest_question, skip_latest_question, analyze_
 from .question import Question
 from .custom_exceptions import EmptyQueue
 
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 
 
 class CheggPy:
