@@ -280,6 +280,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../custom_exceptions/" class="md-nav__link">
+        Custom Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../" class="md-nav__link">
         Index
       </a>
@@ -427,6 +441,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#retry" class="md-nav__link">
+    retry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#welcome_banner" class="md-nav__link">
     welcome_banner
   </a>
@@ -530,6 +551,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#retry" class="md-nav__link">
+    retry
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#welcome_banner" class="md-nav__link">
     welcome_banner
   </a>
@@ -577,6 +605,8 @@
 
 <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">trange</span>
 
+<span class="kn">from</span> <span class="nn">.custom_exceptions</span> <span class="kn">import</span> <span class="n">MaxRetryReached</span>
+
 <span class="k">def</span> <span class="nf">welcome_banner</span><span class="p">():</span>
 
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -613,15 +643,21 @@
 
 <span class="k">def</span> <span class="nf">goodbye_banner</span><span class="p">():</span>
 
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Display a goodbye banner.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="nb">print</span><span class="p">(</span><span class="n">Fore</span><span class="o">.</span><span class="n">RED</span> <span class="o">+</span> <span class="s2">&quot;&quot;&quot;</span>
 
-<span class="s2">      |----------------------------------------------------------Klark in the Zodiac----------------------------------------------------------|</span>
-
-<span class="s2">      |---------------------------------------------------------------------------------------------------------------------------------------|</span>
+<span class="s2">      |                                                         &lt;----------[Klark in the Zodiac]----------&gt;                                                         |</span>
 
 <span class="s2">    &quot;&quot;&quot;</span>
 
           <span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Found any bugs. Raise it here -&gt; https://github.com/Harry-kp/cheggpy/issues&quot;</span><span class="p">)</span>
 
 <span class="k">def</span> <span class="nf">clear_screen</span><span class="p">():</span>
 
@@ -643,9 +679,7 @@
 
     <span class="n">tym</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">min_time</span><span class="p">,</span> <span class="n">max_time</span><span class="p">)</span> <span class="o">*</span> <span class="mi">60</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Waiting for </span><span class="si">{</span><span class="n">tym</span><span class="si">}</span><span class="s2"> seconds..........&quot;</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">trange</span><span class="p">(</span><span class="n">tym</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">trange</span><span class="p">(</span><span class="n">tym</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Sleeping 😴&#39;</span><span class="p">):</span>
 
         <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
@@ -659,9 +693,7 @@
 
     <span class="n">tym</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="n">min_time</span><span class="p">,</span> <span class="n">max_time</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Waiting for </span><span class="si">{</span><span class="n">tym</span><span class="si">}</span><span class="s2"> seconds..........&quot;</span><span class="p">)</span>
-
-    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">trange</span><span class="p">(</span><span class="n">tym</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">trange</span><span class="p">(</span><span class="n">tym</span><span class="p">,</span> <span class="n">desc</span><span class="o">=</span><span class="s1">&#39;Sleeping 😴&#39;</span><span class="p">):</span>
 
         <span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 
@@ -676,6 +708,60 @@
     <span class="n">mp3_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="vm">__file__</span><span class="p">),</span> <span class="s1">&#39;assets&#39;</span><span class="p">,</span> <span class="s1">&#39;notify.mp3&#39;</span><span class="p">)</span>
 
     <span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;afplay </span><span class="si">{</span><span class="n">mp3_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">retry</span><span class="p">(</span><span class="n">max_retries</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">exceptions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Decorator that retries a function call a specified number of times if it raises specific exceptions.</span>
+
+<span class="sd">    Args:</span>
+
+<span class="sd">        max_retries (int, optional): The maximum number of retries. Set to -1 for unlimited retries. Defaults to -1.</span>
+
+<span class="sd">        exceptions (Exception or tuple of Exception, optional): The exception(s) to catch and retry. Defaults to None.</span>
+
+<span class="sd">    Returns:</span>
+
+<span class="sd">        The decorated function.</span>
+
+<span class="sd">    Raises:</span>
+
+<span class="sd">        MaxRetryReached: If the maximum number of retries is reached and the function still raises an exception.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+
+        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+
+            <span class="n">retries</span> <span class="o">=</span> <span class="mi">0</span>
+
+            <span class="k">while</span> <span class="n">retries</span> <span class="o">&lt;</span> <span class="n">max_retries</span> <span class="ow">or</span> <span class="n">max_retries</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+
+                <span class="k">try</span><span class="p">:</span>
+
+                    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+                <span class="k">except</span> <span class="n">exceptions</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span>
+
+                    <span class="n">retries</span> <span class="o">+=</span> <span class="mi">1</span>
+
+                    <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">err</span><span class="p">),</span> <span class="sa">f</span><span class="s2">&quot;Retrying </span><span class="si">{</span><span class="n">retries</span><span class="si">}</span><span class="s2">..........&quot;</span><span class="p">)</span>
+
+                    <span class="k">if</span> <span class="n">retries</span> <span class="o">==</span> <span class="n">max_retries</span><span class="p">:</span>
+
+                        <span class="k">raise</span> <span class="n">MaxRetryReached</span><span class="p">(</span><span class="s1">&#39;Max retries reached. Failed to fetch the question.&#39;</span><span class="p">)</span> <span class="kn">from</span> <span class="nn">err</span>
+
+                    <span class="n">random_long_wait</span><span class="p">()</span>
+
+            <span class="c1"># This return statement is added to provide consistency</span>
+
+            <span class="k">return</span> <span class="kc">None</span>  <span class="c1"># or raise another exception here if needed</span>
+
+        <span class="k">return</span> <span class="n">wrapper</span>
+
+    <span class="k">return</span> <span class="n">decorator</span>
 </code></pre></div>
 
 </details>
@@ -707,19 +793,26 @@
 <span class="p">)</span>
 </code></pre></div>
 
+<p>Display a goodbye banner.</p>
 <details class="example">
 <summary>View Source</summary>
-<div class="codehilite"><pre><span></span><code><span class="c">def goodbye_banner():</span>
+<div class="codehilite"><pre><span></span><code><span class="n">def</span><span class="w"> </span><span class="n">goodbye_banner</span><span class="p">()</span><span class="o">:</span>
 
-<span class="c">    print(Fore</span><span class="nt">.</span><span class="c">RED </span><span class="nb">+</span><span class="c"> &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="s">&quot;&quot;&quot;</span>
 
-<span class="c">      |</span><span class="nb">----------------------------------------------------------</span><span class="c">Klark in the Zodiac</span><span class="nb">----------------------------------------------------------</span><span class="c">|</span>
+<span class="s">    Display a goodbye banner.</span>
 
-<span class="c">      |</span><span class="nb">---------------------------------------------------------------------------------------------------------------------------------------</span><span class="c">|</span>
+<span class="s">    &quot;&quot;&quot;</span>
 
-<span class="c">    &quot;&quot;&quot;</span>
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="n">Fore</span><span class="p">.</span><span class="n">RED</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;&quot;&quot;</span>
 
-<span class="c">          )</span>
+<span class="s">      |                                                         &lt;----------[Klark in the Zodiac]----------&gt;                                                         |</span>
+
+<span class="s">    &quot;&quot;&quot;</span>
+
+<span class="w">          </span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="s">&quot;Found any bugs. Raise it here -&gt; https://github.com/Harry-kp/cheggpy/issues&quot;</span><span class="p">)</span>
 </code></pre></div>
 
 </details>
@@ -766,9 +859,7 @@
 
     tym = randint(min_time, max_time) * 60
 
-    print(f&quot;Waiting for {tym} seconds..........&quot;)
-
-    for _ in trange(tym):
+    for _ in trange(tym, desc=&#39;Sleeping 😴&#39;):
 
         sleep(1)
 </code></pre></div>
@@ -794,11 +885,130 @@
 
 <span class="w">    </span><span class="n">tym</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">randint</span><span class="p">(</span><span class="n">min_time</span><span class="p">,</span><span class="w"> </span><span class="n">max_time</span><span class="p">)</span>
 
-<span class="w">    </span><span class="n">print</span><span class="p">(</span><span class="n">f</span><span class="s">&quot;Waiting for {tym} seconds..........&quot;</span><span class="p">)</span>
-
-<span class="w">    </span><span class="n">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">trange</span><span class="p">(</span><span class="n">tym</span><span class="p">)</span><span class="o">:</span>
+<span class="w">    </span><span class="n">for</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span><span class="n">trange</span><span class="p">(</span><span class="n">tym</span><span class="p">,</span><span class="w"> </span><span class="n">desc</span><span class="o">=</span><span class="s">&#39;Sleeping 😴&#39;</span><span class="p">)</span><span class="o">:</span>
 
 <span class="w">        </span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</code></pre></div>
+
+</details>
+<h3 id="retry">retry</h3>
+<div class="codehilite"><pre><span></span><code><span class="k">def</span> <span class="nf">retry</span><span class="p">(</span>
+    <span class="n">max_retries</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">exceptions</span><span class="o">=</span><span class="kc">None</span>
+<span class="p">)</span>
+</code></pre></div>
+
+<p>Decorator that retries a function call a specified number of times if it raises specific exceptions.</p>
+<p><strong>Parameters:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+<th>Default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>max_retries</td>
+<td>int</td>
+<td>The maximum number of retries. Set to -1 for unlimited retries. Defaults to -1.</td>
+<td>-1</td>
+</tr>
+<tr>
+<td>exceptions</td>
+<td>Exception or tuple of Exception</td>
+<td>The exception(s) to catch and retry. Defaults to None.</td>
+<td>None</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td>The decorated function.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Raises:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MaxRetryReached</td>
+<td>If the maximum number of retries is reached and the function still raises an exception.</td>
+</tr>
+</tbody>
+</table>
+<details class="example">
+<summary>View Source</summary>
+<div class="codehilite"><pre><span></span><code>def retry(max_retries=-1, exceptions=None):
+
+    &quot;&quot;&quot;
+
+    Decorator that retries a function call a specified number of times if it raises specific exceptions.
+
+    Args:
+
+        max_retries (int, optional): The maximum number of retries. Set to -1 for unlimited retries. Defaults to -1.
+
+        exceptions (Exception or tuple of Exception, optional): The exception(s) to catch and retry. Defaults to None.
+
+    Returns:
+
+        The decorated function.
+
+    Raises:
+
+        MaxRetryReached: If the maximum number of retries is reached and the function still raises an exception.
+
+    &quot;&quot;&quot;
+
+    def decorator(func):
+
+        def wrapper(*args, **kwargs):
+
+            retries = 0
+
+            while retries &lt; max_retries or max_retries == -1:
+
+                try:
+
+                    return func(*args, **kwargs)
+
+                except exceptions as err:
+
+                    retries += 1
+
+                    print(str(err), f&quot;Retrying {retries}..........&quot;)
+
+                    if retries == max_retries:
+
+                        raise MaxRetryReached(&#39;Max retries reached. Failed to fetch the question.&#39;) from err
+
+                    random_long_wait()
+
+            # This return statement is added to provide consistency
+
+            return None  # or raise another exception here if needed
+
+        return wrapper
+
+    return decorator
 </code></pre></div>
 
 </details>

@@ -280,6 +280,20 @@
   
   
     <li class="md-nav__item">
+      <a href="../custom_exceptions/" class="md-nav__link">
+        Custom Exceptions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../" class="md-nav__link">
         Index
       </a>
@@ -527,6 +541,8 @@
 
 <span class="kn">import</span> <span class="nn">json</span>
 
+<span class="kn">from</span> <span class="nn">.custom_exceptions</span> <span class="kn">import</span> <span class="n">EmptyQueue</span><span class="p">,</span> <span class="n">NoQuestionToSkip</span>
+
 <span class="k">def</span> <span class="nf">fetch_latest_question</span><span class="p">(</span><span class="n">session</span><span class="p">):</span>
 
 <span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
@@ -538,8 +554,6 @@
 <span class="sd">        Otherwise, returns None or raises an Exception.</span>
 
 <span class="sd">        &#39;&#39;&#39;</span>
-
-    <span class="c1"># log(&#39;Fetching the question&#39;)</span>
 
     <span class="n">chegg_question_url</span> <span class="o">=</span> <span class="s2">&quot;https://gateway.chegg.com/nestor-graph/graphql&quot;</span>
 
@@ -589,6 +603,12 @@
 
     <span class="k">if</span> <span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;errors&#39;</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
 
+        <span class="n">error</span> <span class="o">=</span> <span class="n">response</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">error</span><span class="p">[</span><span class="s1">&#39;extensions&#39;</span><span class="p">][</span><span class="s1">&#39;errorType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;NO_QUESTION_ASSIGNED&#39;</span><span class="p">:</span>
+
+            <span class="k">raise</span> <span class="n">EmptyQueue</span><span class="p">(</span><span class="s1">&#39;No more question left in queue to answer.&#39;</span><span class="p">)</span>
+
         <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;message&#39;</span><span class="p">])</span>
 
     <span class="k">return</span> <span class="n">response</span>
@@ -599,7 +619,7 @@
 
     <span class="k">if</span> <span class="n">question</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">question</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
 
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;No question to skip&#39;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="n">NoQuestionToSkip</span><span class="p">(</span><span class="s1">&#39;No question to skip.&#39;</span><span class="p">)</span>
 
     <span class="n">chegg_question_url</span> <span class="o">=</span> <span class="s2">&quot;https://gateway.chegg.com/nestor-graph/graphql&quot;</span>
 
@@ -695,8 +715,6 @@ Otherwise, returns None or raises an Exception.</p>
 
 <span class="sd">        &#39;&#39;&#39;</span>
 
-<span class="w">    </span><span class="c1"># log(&#39;Fetching the question&#39;)</span>
-
 <span class="w">    </span><span class="n">chegg_question_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://gateway.chegg.com/nestor-graph/graphql&quot;</span>
 
 <span class="w">    </span><span class="n">payload</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">({</span>
@@ -745,6 +763,12 @@ Otherwise, returns None or raises an Exception.</p>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;errors&#39;</span><span class="p">)</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">None</span><span class="p">:</span>
 
+<span class="w">        </span><span class="n">error</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="n">error</span><span class="p">[</span><span class="s1">&#39;extensions&#39;</span><span class="p">][</span><span class="s1">&#39;errorType&#39;</span><span class="p">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s1">&#39;NO_QUESTION_ASSIGNED&#39;</span><span class="p">:</span>
+
+<span class="w">            </span><span class="n">raise</span><span class="w"> </span><span class="n">EmptyQueue</span><span class="p">(</span><span class="s1">&#39;No more question left in queue to answer.&#39;</span><span class="p">)</span>
+
 <span class="w">        </span><span class="n">raise</span><span class="w"> </span><span class="n">NotImplementedError</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s1">&#39;errors&#39;</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;message&#39;</span><span class="p">])</span>
 
 <span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">response</span>
@@ -767,7 +791,7 @@ Otherwise, returns None or raises an Exception.</p>
 
 <span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="n">question</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">question</span><span class="o">.</span><span class="n">id</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">None</span><span class="p">:</span>
 
-<span class="w">        </span><span class="n">raise</span><span class="w"> </span><span class="n">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;No question to skip&#39;</span><span class="p">)</span>
+<span class="w">        </span><span class="n">raise</span><span class="w"> </span><span class="n">NoQuestionToSkip</span><span class="p">(</span><span class="s1">&#39;No question to skip.&#39;</span><span class="p">)</span>
 
 <span class="w">    </span><span class="n">chegg_question_url</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">&quot;https://gateway.chegg.com/nestor-graph/graphql&quot;</span>
 
