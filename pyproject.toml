@@ -1,7 +1,7 @@
 # pyproject.toml
 
 [build-system]
-requires      = ["setuptools>=61.0.0", "wheel"]
+requires = ["setuptools>=61.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -17,13 +17,7 @@ classifiers = [
     "Programming Language :: Python :: 3",
 ]
 keywords = ["chegg", "automation"]
-dependencies = [
-    'bs4',
-    'requests',
-    'colorama',
-    'tqdm',
-    'tomli',
-]
+dependencies = ['bs4', 'requests', 'colorama', 'tqdm', 'tomli']
 requires-python = ">=3"
 
 [project.optional-dependencies]
@@ -38,10 +32,10 @@ cheggbot = "cheggpy.__main__:main"
 [tool.bumpver]
 current_version = "1.0.2"
 version_pattern = "MAJOR.MINOR.PATCH"
-commit_message  = "Bump version {old_version} -> {new_version}"
-commit          = true
-tag             = true
-push            = false
+commit_message = "Bump version {old_version} -> {new_version}"
+commit = true
+tag = true
+push = false
 
 [tool.bumpver.file_patterns]
 "pyproject.toml" = ['current_version = "{version}"', 'version = "{version}"']
@@ -49,3 +43,22 @@ push            = false
 
 [tool.portray]
 output_dir = "docs"
+
+[tool.portray.mkdocs]
+repo_url = "https://github.com/Harry-kp/cheggpy"
+
+[tool.portray.mkdocs.theme]
+icon = { logo = "material/language-python", favicon = "material/language-python" }
+name = "material"
+palette = { scheme = "slate" }
+features = [
+    "header.autohide",
+    "navigation.footer",
+    "navigation.instant",
+    "navigation.expand",
+    "navigation.instant.prefetch",
+    "navigation.path",
+    "navigation.top",
+    "navigation.instant.progress",
+]
+
