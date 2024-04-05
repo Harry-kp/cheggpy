@@ -42,6 +42,14 @@ cheggbot --username <your-username> --password <your-password> --keywords python
 
 Refer to the ```quickstart.py``` file for a quick start guide.
 
+## Subscribe to Our Channel
+
+If you find this package useful, please consider subscribing to our channel for more updates. We need your support to grow our channel.
+
+[**Subscribe Here**](https://www.youtube.com/channel/UCYrIyQDF2t29T49KM0IYb1A?sub_confirmation=1)
+
+[![Subscribe on YouTube](https://github.com/Harry-kp/cheggpy/assets/55315065/42bae23a-6239-47fa-887f-0448bb92622b)](https://youtu.be/hZee5E0L9KQ?si=hQ3wecA7R5yOWDJJ)
+
 ## Contributing 🤝
 
 Contributions are welcome! Please feel free to open issues or pull requests for any improvements or features you'd like to see.
